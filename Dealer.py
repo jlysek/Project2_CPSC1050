@@ -1,3 +1,23 @@
+"""
+This file is called Dealer.py and has a Dealer Class
+"""
+import os
+import time
+import random
+
+#Creating class to log to an output file, this will be inheritted 
+class CasinoLogger:
+    def __init__(self, log_path):
+        self.log_path = log_path
+
+    #Logging perfomace to output log
+    def log_performance(self, player_name, total):
+        try:
+            with open(self.log_path, 'a') as log_file:
+                log_file.write(f"{player_name}: ${total:.2f}\n")
+        except Exception as e:
+            print(f"Error logging performance: {e}")
+
 #Inheriting CasinoLogger to log Dealers output
 class Dealer(CasinoLogger):
     def __init__(self, user_bet, log_path="lysek_casino_performance_log.txt"):
@@ -6,7 +26,7 @@ class Dealer(CasinoLogger):
         self.dealer_total = 0
 
     #Simulating what a player do for when user is dealer
-    def manage_game(self):
+    def manage_game(self,name):
         while True:
             #Randomly choses bet size
             bet_size = random.randint(100, 1001)

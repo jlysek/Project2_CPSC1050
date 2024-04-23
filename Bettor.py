@@ -1,3 +1,10 @@
+"""
+File is called Bettor.py with a User_bet class
+"""
+import os
+import time
+import random
+
 class User_bet:
     def __init__(self):
         #Assigning the role

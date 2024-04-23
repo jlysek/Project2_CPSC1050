@@ -1,6 +1,23 @@
 """
-This file sets up the game of roulette with the Wheel Class
+This file is named Setting_UP.py sets up the game of roulette with the Wheel Class
+and Results Class
 """
+import os
+import time
+import random
+
+#Creating class to log to an output file, this will be inheritted 
+class CasinoLogger:
+    def __init__(self, log_path):
+        self.log_path = log_path
+
+    #Logging perfomace to output log
+    def log_performance(self, player_name, total):
+        try:
+            with open(self.log_path, 'a') as log_file:
+                log_file.write(f"{player_name}: ${total:.2f}\n")
+        except Exception as e:
+            print(f"Error logging performance: {e}")
 
 
 #Creating Class of the wheel
@@ -89,19 +106,15 @@ class Results(CasinoLogger):
         self.wheel.display_remaining_spots()
 
     #Checking to see if winner
-    def check_winner(self, bet, spin):
-        #Seeing if player won and returns boolean
+    def check_winner(self, bet, spin, name):
         win = self.resolve_bet(bet, spin)
-
-        #If player won
         if win:
-            self.total += bet[1] * 1.5  # Increase total by 1.5 times the bet amount on a win
+            self.total += bet[1] * 1.5
             print(f"\nCongratulations, you won this round! Your total is now ${self.total:.2f}")
             if self.total >= 0:
                 print(
                     f'\nYour potential payout next round is ${(self.total * 1.5):.2f}, or you could walk away with your current winnings.')
-
-        #If Player lost
+    #If Player lost
         else:
             if self.total > 0:
                 #If the player has winnings from previous rounds, reset total to zero upon losing
@@ -111,8 +124,7 @@ class Results(CasinoLogger):
                 #If already at zero or negative, just update the display without changing the total
                 pass
             print(f"\nSorry, you lost this round! Your total is now ${self.total:.2f}")
-
-        #Updating the wheel and logging it to the leaderboard
+        
         self.update_wheel_and_feedback(spin)
         self.log_performance(name, self.total)
 
