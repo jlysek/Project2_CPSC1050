@@ -5,6 +5,8 @@ Date 4/18/2024
 
 This is the main file called Falling_Roulette to run the falling roulette game
 
+github_link = https://github.com/jlysek/Project2_CPSC1050.git
+
 Game Title: Falling Roulette at the Lysek Casino
 Map: Lysek Casino
 Outputs: All time Leaderboard
